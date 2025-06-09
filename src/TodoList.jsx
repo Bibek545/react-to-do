@@ -1,13 +1,66 @@
-import React from 'react'
-import { useState } from 'react'
+import React from "react";
+import { useState } from "react";
 
 const TodoList = () => {
-    
-  return (
-    <div>
-      
-    </div>
-  )
-}
+  const [task, setTask] = useState([
+    "Eat breakfast",
+    "take a shower",
+    "walk the dog",
+  ]);
+  const [newTask, setNewTask] = useState(" ");
 
-export default TodoList
+  const handleInputChange = (event) => {
+    setNewTask(event.target.value);
+    console.log(event.target.value);
+  };
+
+  const addTask = () => {};
+
+  const deleteTask = (index) => {};
+
+  const moveTaskUp = (index) => {};
+
+  const moveTaskDown = (index) => {};
+  return (
+    <div className="to-do-list">
+      <h1>To-do-list</h1>
+
+      <div>
+        <input
+          type="text"
+          placeholder="Enter a task..."
+          value={newTask}
+          onChange={handleInputChange}
+        />
+
+        <button className="add-button" onClick={addTask}>
+          Add
+        </button>
+      </div>
+      <ol>
+        {task.map((task, index) => (
+          <li key={index}>
+            <span className="text"> {task}</span>
+            <button className="delete-button" onClick={() => deleteTask(index)}>
+              Delete
+            </button>
+            <button
+              className="move-button-up"
+              onClick={() => moveTaskUp(index)}
+            >
+              Move-up
+            </button>
+            <button
+              className="move-button-down"
+              onClick={() => moveTaskUp(index)}
+            >
+              Move-down
+            </button>
+          </li>
+        ))}
+      </ol>
+    </div>
+  );
+};
+
+export default TodoList;

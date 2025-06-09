@@ -1,13 +1,15 @@
 import TodoList from './TodoList'
 import './App.css'
+import { useState } from 'react'
 
 function App() {
 
+
   return (
     <>
-    <p>Bibek Hamal</p>
+     <TodoList />
     </>
   )
 }
 
-export default App
+export default App;
