@@ -48,13 +48,13 @@ const TodoList = () => {
               className="move-button-up"
               onClick={() => moveTaskUp(index)}
             >
-              Move-up
+              Up
             </button>
             <button
               className="move-button-down"
               onClick={() => moveTaskUp(index)}
             >
-              Move-down
+              Down
             </button>
           </li>
         ))}
