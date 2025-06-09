@@ -2,25 +2,50 @@ import React from "react";
 import { useState } from "react";
 
 const TodoList = () => {
-  const [task, setTask] = useState([
-    "Eat breakfast",
-    "take a shower",
-    "walk the dog",
+  const [tasks, setTasks] = useState([
+    // "Eat breakfast",
+    // "take a shower",
+    // "walk the dog",
   ]);
-  const [newTask, setNewTask] = useState(" ");
+  const [newTask, setNewTask] = useState("");
 
   const handleInputChange = (event) => {
     setNewTask(event.target.value);
     console.log(event.target.value);
   };
 
-  const addTask = () => {};
+  const addTask = () => {
+      if(newTask.trim() !== "" ) {
+   setTasks(t => [...t, newTask]);
+   setNewTask(" ");
+  }
+  
+  };
 
-  const deleteTask = (index) => {};
 
-  const moveTaskUp = (index) => {};
+  const deleteTask = (index) => {
 
-  const moveTaskDown = (index) => {};
+
+        const updatedTasks = tasks.filter((task, taskIndex) => taskIndex !==index);
+    setTasks(updatedTasks);
+  }
+  ;
+
+  const moveTaskUp = (index) => {
+    if (index > 0) {
+        const updatedTasks = [...tasks];
+        [updatedTasks[index], updatedTasks[index - 1]] = [updatedTasks[index-1], updatedTasks[index]];
+        setTasks(updatedTasks);
+    }
+  };
+
+  const moveTaskDown = (index) => {
+        if (index < tasks.length - 1) {
+        const updatedTasks = [...tasks];
+        [updatedTasks[index], updatedTasks[index + 1]] = [updatedTasks[index + 1], updatedTasks[index]];
+        setTasks(updatedTasks);
+    }
+  };
   return (
     <div className="to-do-list">
       <h1>To-do-list</h1>
@@ -38,7 +63,7 @@ const TodoList = () => {
         </button>
       </div>
       <ol>
-        {task.map((task, index) => (
+        {tasks.map((task, index) => (
           <li key={index}>
             <span className="text"> {task}</span>
             <button className="delete-button" onClick={() => deleteTask(index)}>
@@ -52,7 +77,7 @@ const TodoList = () => {
             </button>
             <button
               className="move-button-down"
-              onClick={() => moveTaskUp(index)}
+              onClick={() => moveTaskDown(index)}
             >
               Down
             </button>
